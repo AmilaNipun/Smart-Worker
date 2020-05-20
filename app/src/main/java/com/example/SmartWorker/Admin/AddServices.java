@@ -27,7 +27,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.HashMap;
 
-public class AddPromotion extends AppCompatActivity {
+public class AddServices extends AppCompatActivity {
 
     private static final int REQUEST_CODE_IMAGE = 101;
     //variables
@@ -35,7 +35,7 @@ public class AddPromotion extends AppCompatActivity {
     TextView textViewProgress;
     ProgressBar progressBar;
     Button addPromotionSave;
-    EditText addPromotionTopic,addPromotionDesc,addPromotionPrice;
+    EditText addServiceTopic,addServiceDesc,addServicelocation,addServicecon;
     Uri imageUri;
     boolean isImageAdded = false;
 
@@ -46,15 +46,16 @@ public class AddPromotion extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_promotion);
+        setContentView(R.layout.activity_add_services);
 
         addPromotion_ImageView = findViewById(R.id.image_view_add_promotion);
         textViewProgress = findViewById(R.id.textViewProgress_Promotion);
         progressBar = findViewById(R.id.addPromotion_progressBar);
         addPromotionSave = findViewById(R.id.addPromotion_save_btn);
-        addPromotionTopic = findViewById(R.id.add_promotion_topic);
-        addPromotionDesc = findViewById(R.id.add_promotion_descrip);
-        addPromotionPrice = findViewById(R.id.add_promotion_price);
+        addServiceTopic = findViewById(R.id.add_service_topic);
+        addServiceDesc = findViewById(R.id.add_service_descrip);
+        addServicelocation = findViewById(R.id.add_service_location);
+        addServicecon = findViewById(R.id.add_service_contact);
 
         dataReference = FirebaseDatabase.getInstance().getReference().child("Add Services");
         storageReference = FirebaseStorage.getInstance().getReference().child("AddPromotionImages");
@@ -72,47 +73,59 @@ public class AddPromotion extends AppCompatActivity {
     }
 
     private boolean validateTopic(){
-        String val = addPromotionTopic.getText().toString();
+        String val = addServiceTopic.getText().toString();
 
         if(val.isEmpty()) {
-            addPromotionTopic.setError("Field Cannot be Empty");
+            addServiceTopic.setError("Field Cannot be Empty");
             return false;
         }else if(val.length() >= 150) {
-            addPromotionTopic.setError("Topic is Too Long");
+            addServiceTopic.setError("Topic is Too Long");
             return false;
         }else{
-            addPromotionTopic.setError(null);
+            addServiceTopic.setError(null);
             return true;
         }
     }
     private boolean validateDescription(){
-        String val = addPromotionDesc.getText().toString();
+        String val = addServiceDesc.getText().toString();
 
         if(val.isEmpty()) {
-            addPromotionDesc.setError("Field Cannot be Empty");
+            addServiceDesc.setError("Field Cannot be Empty");
             return false;
         }else if(val.length() >= 1500) {
-            addPromotionDesc.setError("Description is Too Long");
+            addServiceDesc.setError("Description is Too Long");
             return false;
         }else{
-            addPromotionDesc.setError(null);
+            addServiceDesc.setError(null);
             return true;
         }
     }
-    private boolean validatePrice(){
-        String val = addPromotionPrice.getText().toString();
+    private boolean validateLocation(){
+        String val = addServicelocation.getText().toString();
 
         if(val.isEmpty()) {
-            addPromotionPrice.setError("Field Cannot be Empty");
+            addServicelocation.setError("Field Cannot be Empty");
             return false;
         }else{
-            addPromotionPrice.setError(null);
+            addServicelocation.setError(null);
+            return true;
+        }
+    }
+
+    private boolean validateCon(){
+        String val = addServicecon.getText().toString();
+
+        if(val.isEmpty()) {
+            addServicecon.setError("Field Cannot be Empty");
+            return false;
+        }else{
+            addServicecon.setError(null);
             return true;
         }
     }
 
     public void uploadPromotion(View view){
-        if(!validateTopic() | !validateDescription() | !validatePrice()){
+        if(!validateTopic() | !validateDescription() | !validateCon() | !validateLocation()){
             return;
         }else{
             addPromotionDetails();
@@ -132,9 +145,10 @@ public class AddPromotion extends AppCompatActivity {
 
     private void addPromotionDetails(){
 
-        final String add_promotion_topic = addPromotionTopic.getText().toString();
-        final String add_promotion_description = addPromotionDesc.getText().toString();
-        final String add_promotion_price = addPromotionPrice.getText().toString();
+        final String add_service_topic = addServiceTopic.getText().toString();
+        final String add_service_description = addServiceDesc.getText().toString();
+        final String add_service_location = addServicelocation.getText().toString();
+        final String add_service_contact = addServicecon.getText().toString();
 
 
         if(isImageAdded!=false){
@@ -151,21 +165,22 @@ public class AddPromotion extends AppCompatActivity {
                         @Override
                         public void onSuccess(Uri uri) {
                             HashMap<String, String> hashMap = new HashMap<>();
-                            hashMap.put("PromotionTopic",add_promotion_topic);
-                            hashMap.put("PromotionDescription",add_promotion_description);
-                            hashMap.put("PromotionDiscount",add_promotion_price);
+                            hashMap.put("ServiceTopic",add_service_topic);
+                            hashMap.put("ServiceDescription",add_service_description);
+                            hashMap.put("ServiceLocation",add_service_location);
+                            hashMap.put("ServiceContact",add_service_contact);
                             hashMap.put("ImageURL",uri.toString());
 
                             dataReference.child(key).setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void aVoid) {
-                                    Toast.makeText(AddPromotion.this,"Data Successfully Uploaded",Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(AddPromotion.this,AdminDashboard.class));
+                                    Toast.makeText(AddServices.this,"Data Successfully Uploaded",Toast.LENGTH_SHORT).show();
+                                    startActivity(new Intent(AddServices.this,AdminDashboard.class));
                                 }
                             }).addOnFailureListener(new OnFailureListener() {
                                 @Override
                                 public void onFailure(@NonNull Exception e) {
-                                    Toast.makeText(AddPromotion.this, "Error", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(AddServices.this, "Error", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -174,7 +189,7 @@ public class AddPromotion extends AppCompatActivity {
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception e) {
-                    Toast.makeText(AddPromotion.this, "Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddServices.this, "Error", Toast.LENGTH_SHORT).show();
                 }
             }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                 @Override

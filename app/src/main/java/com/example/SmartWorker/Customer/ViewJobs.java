@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.denzcoskun.imageslider.ImageSlider;
 import com.denzcoskun.imageslider.models.SlideModel;
+import com.example.SmartWorker.LoginRegister.Login;
 import com.example.SmartWorker.Model.ViewJobsHolder;
 import com.example.SmartWorker.Model.ViewJobsModel;
 import com.example.SmartWorker.R;
@@ -60,8 +61,10 @@ public class ViewJobs extends AppCompatActivity implements NavigationView.OnNavi
         recyclerView = findViewById(R.id.recyclerViewJobsView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         recyclerView.setHasFixedSize(true);
-        ref = FirebaseDatabase.getInstance().getReference().child("Add Jobs");
         mAuth = FirebaseAuth.getInstance();
+        String uid = mAuth.getCurrentUser().getUid();
+        ref = FirebaseDatabase.getInstance().getReference().child("Add Jobs");
+
 
         //Image Slider
         ImageSlider imageSlider = findViewById(R.id.slider);
@@ -139,11 +142,21 @@ public class ViewJobs extends AppCompatActivity implements NavigationView.OnNavi
 
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
+                startActivity(new Intent(ViewJobs.this,Dashboard.class));
                 break;
 
             case R.id.nav_profile:
+                String uid = mAuth.getCurrentUser().getUid();
                 Intent intent = new Intent(ViewJobs.this, UserProfile.class);
+                intent.putExtra("UserID",uid);
                 startActivity(intent);
+                break;
+
+            case R.id.nav_logout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(), Login.class));
+                Toast.makeText(this,"Successfully Logged Out!",Toast.LENGTH_SHORT).show();
+                finish();
                 break;
 
             case R.id.nav_share:

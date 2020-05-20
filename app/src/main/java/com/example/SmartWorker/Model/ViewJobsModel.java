@@ -1,12 +1,12 @@
 package com.example.SmartWorker.Model;
 
 public class ViewJobsModel {
-    private String JobBudget,JobCategory,JobDescription,ImageURL,JobDueDate,JobLocation,JobServiceType,JobTile,JobType;
+    private String JobBudget,JobCategory,JobDescription,ImageURL,JobDueDate,JobLocation,JobServiceType,JobTile,JobType,Mobilenum;
 
     public ViewJobsModel() {
     }
 
-    public ViewJobsModel(String jobBudget, String jobCategory, String jobDescription, String imageURL, String jobDueDate, String jobLocation, String jobServiceType, String jobTile, String jobType) {
+    public ViewJobsModel(String jobBudget, String jobCategory, String jobDescription, String imageURL, String jobDueDate, String jobLocation, String jobServiceType, String jobTile, String jobType,String mobilenum) {
         JobBudget = jobBudget;
         JobCategory = jobCategory;
         JobDescription = jobDescription;
@@ -16,6 +16,15 @@ public class ViewJobsModel {
         JobServiceType = jobServiceType;
         JobTile = jobTile;
         JobType = jobType;
+        Mobilenum = mobilenum;
+    }
+
+    public String getMobilenum() {
+        return Mobilenum;
+    }
+
+    public void setMobilenum(String mobilenum) {
+        Mobilenum = mobilenum;
     }
 
     public String getJobBudget() {

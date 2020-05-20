@@ -18,6 +18,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.SmartWorker.LoginRegister.Login;
 import com.example.SmartWorker.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,7 +42,7 @@ public class ViewJobsExpand extends AppCompatActivity implements NavigationView.
     FirebaseAuth mAuth;
     Button requestJobBTN;
     ProgressBar progressBar;
-    TextView jobBudget,jobCategory,jobDescription,JobDueDate,JobLocation,JobServiceType,jobTitle,JobType;
+    TextView jobBudget,jobCategory,jobDescription,JobDueDate,JobLocation,JobServiceType,jobTitle,JobType,contactname,contactnumber;
     ImageView imageView;
 
     @Override
@@ -64,6 +65,8 @@ public class ViewJobsExpand extends AppCompatActivity implements NavigationView.
         JobType = findViewById(R.id.textViewJobType);
         imageView = findViewById(R.id.JobViewImage);
         progressBar = findViewById(R.id.prograssBarRequest);
+        contactname = findViewById(R.id.textViewContactName);
+        contactnumber = findViewById(R.id.textViewContactNumber);
         ref = FirebaseDatabase.getInstance().getReference().child("Add Jobs");
         mAuth = FirebaseAuth.getInstance();
 
@@ -97,6 +100,9 @@ public class ViewJobsExpand extends AppCompatActivity implements NavigationView.
                     String job_service_type = dataSnapshot.child("JobServiceType").getValue().toString();
                     String job_type = dataSnapshot.child("JobType").getValue().toString();
                     String imageURL = dataSnapshot.child("ImageURL").getValue().toString();
+                    String conname = dataSnapshot.child("ContactName").getValue().toString();
+                    String connum = dataSnapshot.child("ContactNumber").getValue().toString();
+
 
                     Picasso.get().load(imageURL).into(imageView);
                     jobBudget.setText(job_budget);
@@ -107,7 +113,8 @@ public class ViewJobsExpand extends AppCompatActivity implements NavigationView.
                     JobServiceType.setText(job_service_type);
                     jobTitle.setText(job_title);
                     JobType.setText(job_type);
-
+                    contactname.setText(conname);
+                    contactnumber.setText(connum);
 
                 }
             }
@@ -135,6 +142,9 @@ public class ViewJobsExpand extends AppCompatActivity implements NavigationView.
                             String job_location = dataSnapshot.child("JobLocation").getValue().toString();
                             String job_service_type = dataSnapshot.child("JobServiceType").getValue().toString();
                             String job_type = dataSnapshot.child("JobType").getValue().toString();
+                            String conname = dataSnapshot.child("ContactName").getValue().toString();
+                            String connum = dataSnapshot.child("ContactNumber").getValue().toString();
+
                             String imageURL = dataSnapshot.child("ImageURL").getValue().toString();
 
                             String uid = mAuth.getCurrentUser().getUid();
@@ -149,6 +159,8 @@ public class ViewJobsExpand extends AppCompatActivity implements NavigationView.
                             hashMap.put("JobLocation",job_location);
                             hashMap.put("ServiceType",job_service_type);
                             hashMap.put("JobType",job_type);
+                            hashMap.put("ContactName",conname);
+                            hashMap.put("ContactNumber",connum);
                             hashMap.put("ImageUrl",imageURL);
 
                             ref.setValue(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -201,11 +213,21 @@ public class ViewJobsExpand extends AppCompatActivity implements NavigationView.
 
         switch (menuItem.getItemId()) {
             case R.id.nav_home:
+                startActivity(new Intent(ViewJobsExpand.this,Dashboard.class));
                 break;
 
             case R.id.nav_profile:
+                String uid = mAuth.getCurrentUser().getUid();
                 Intent intent = new Intent(ViewJobsExpand.this, UserProfile.class);
+                intent.putExtra("UserID",uid);
                 startActivity(intent);
+                break;
+
+            case R.id.nav_logout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(getApplicationContext(), Login.class));
+                Toast.makeText(this,"Successfully Logged Out!",Toast.LENGTH_SHORT).show();
+                finish();
                 break;
 
             case R.id.nav_share:

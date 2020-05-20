@@ -9,13 +9,13 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
-<!--    <com.google.android.material.navigation.NavigationView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:id="@+id/nav_view_admin"-->
-<!--        app:headerLayout="@layout/header"-->
-<!--        app:menu="@menu/main_menu_admin"-->
-<!--        android:layout_gravity="start"/>-->
+    <com.google.android.material.navigation.NavigationView
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:id="@+id/nav_view_admin"
+        app:headerLayout="@layout/header"
+        app:menu="@menu/main_menu_admin"
+        android:layout_gravity="start"/>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -124,7 +124,7 @@
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/acceptjobs_card"
+                    android:id="@+id/addservices_card"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
@@ -139,9 +139,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/addaccessimageView"
-                            android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="Accept Jobs"
+                            android:text="Add Services"
+                            android:layout_centerHorizontal="true"
                             android:textSize="15sp"
                             app:fontFamily="@font/aclonica" />
 
@@ -151,7 +151,7 @@
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/addjob" />
+                            app:srcCompat="@drawable/services" />
 
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
@@ -169,7 +169,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
                 <androidx.cardview.widget.CardView
-                    android:id="@+id/adminmyjobs_card"
+                    android:id="@+id/removejobs_card"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
@@ -186,7 +186,7 @@
                             android:layout_below="@id/addrentcarimageView"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="My JObs"
+                            android:text="Remove JObs"
                             android:textSize="15sp"
                             app:fontFamily="@font/aclonica" />
 
@@ -196,87 +196,7 @@
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/myjobs" />
-
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/addservices_card"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/addpromotextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/addpromoimageView"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="10dp"
-                            android:text="Add Services"
-                            android:textSize="15sp"
-                            app:fontFamily="@font/aclonica" />
-
-                        <ImageView
-                            android:id="@+id/addpromoimageView"
-                            android:layout_width="75dp"
-                            android:layout_height="75dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/services" />
-
-                    </RelativeLayout>
-                </androidx.cardview.widget.CardView>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/linearLayout3"
-                android:layout_width="0dp"
-                android:layout_height="175dp"
-                android:orientation="horizontal"
-                android:padding="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
-
-                <androidx.cardview.widget.CardView
-                    android:id="@+id/removejobs_card"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:layout_weight="1">
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <TextView
-                            android:id="@+id/removecartextView"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/removecarimageView"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="10dp"
-                            android:text="Remove Jobs"
-                            android:textSize="15sp"
-                            app:fontFamily="@font/aclonica" />
-
-                        <ImageView
-                            android:id="@+id/removecarimageView"
-                            android:layout_width="75dp"
-                            android:layout_height="75dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/viewjobs" />
-
-
+                            app:srcCompat="@drawable/remove" />
 
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
@@ -293,10 +213,10 @@
                         android:layout_height="match_parent">
 
                         <TextView
-                            android:id="@+id/removeaccesstextView"
+                            android:id="@+id/addpromotextView"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_below="@id/removeaccessimageView"
+                            android:layout_below="@id/addpromoimageView"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
                             android:text="Remove Services"
@@ -304,16 +224,19 @@
                             app:fontFamily="@font/aclonica" />
 
                         <ImageView
-                            android:id="@+id/removeaccessimageView"
+                            android:id="@+id/addpromoimageView"
                             android:layout_width="75dp"
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/services" />
+                            app:srcCompat="@drawable/remove2" />
 
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
+
             </LinearLayout>
+
+
 
 
 

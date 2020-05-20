@@ -36,10 +36,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="resourceFile" />
-        <option value="Class" />
         <option value="layoutResourceFile" />
+        <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1ayL9N99TBZzRzIebQYpNIpDwDP" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -49,10 +52,10 @@
     <property name="algorithm" value="Scalr" />
     <property name="destination" value="DRAWABLE" />
     <property name="format" value="PNG" />
-    <property name="lastFolderRoot" value="$USER_HOME$/Desktop/3.jpg" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/3.jpg" />
+    <property name="lastFolderRoot" value="$PROJECT_DIR$/../Remove2.png" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="method" value="Automatic" />
-    <property name="resolutions" value="MDPI&#10;HDPI&#10;XXXHDPI&#10;XHDPI&#10;LDPI&#10;XXHDPI" />
+    <property name="resolutions" value="XHDPI&#10;XXXHDPI&#10;HDPI&#10;XXHDPI&#10;LDPI&#10;MDPI" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="sourceResolution" value="XHDPI" />
   </component>
@@ -146,5 +149,18 @@
       <updated>1587702736198</updated>
     </task>
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

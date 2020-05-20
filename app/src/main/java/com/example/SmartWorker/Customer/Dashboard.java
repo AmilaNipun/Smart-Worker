@@ -27,6 +27,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     NavigationView navigationView;
     Toolbar toolbar;
     CardView viewjobs,addjobs,myjobs,help,services;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         services = findViewById(R.id.services_card);
         help = findViewById(R.id.help_card);
        myjobs = findViewById(R.id.myjobs_card);
+        mAuth = FirebaseAuth.getInstance();
 
         //toolbar
 
@@ -94,7 +96,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this, Help.class);
+                Intent intent = new Intent(Dashboard.this, DeleteJobs.class);
                 startActivity(intent);
             }
         });
@@ -124,7 +126,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 break;
 
             case R.id.nav_profile:
+                String uid = mAuth.getCurrentUser().getUid();
                 Intent intent = new Intent(Dashboard.this, UserProfile.class);
+                intent.putExtra("UserID",uid);
                 startActivity(intent);
                 break;
 

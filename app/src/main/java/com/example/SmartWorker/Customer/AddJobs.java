@@ -21,6 +21,7 @@ import com.example.SmartWorker.R;
 import com.example.SmartWorker.R;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -46,6 +47,7 @@ public class AddJobs extends AppCompatActivity {
 
     DatabaseReference dataReference;
     StorageReference storageReference;
+    FirebaseAuth mAuth;
 
 
     @Override
@@ -69,6 +71,7 @@ public class AddJobs extends AppCompatActivity {
         contactName = findViewById(R.id.addJobContactName);
         contactNumber = findViewById(R.id.addJobContactNumber);
         radioGroup = findViewById(R.id.addJobRadioGroup);
+        mAuth = FirebaseAuth.getInstance();
 
 
 

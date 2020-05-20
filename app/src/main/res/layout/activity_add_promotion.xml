@@ -104,7 +104,15 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="numberDecimal"
-                            android:hint="Promotion Rate"/>
+                            android:hint="Location"/>
+
+                        <EditText
+                            android:id="@+id/add_promotion_price"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="numberDecimal"
+                            android:hint="Contact Info"/>
+
 
 
                     </LinearLayout>

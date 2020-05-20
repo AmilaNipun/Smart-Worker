@@ -27,7 +27,8 @@ public class AdminDashboard extends AppCompatActivity implements NavigationView.
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Toolbar toolbar;
-    CardView adminviewjobs,acceptjobs,adminmyjobs,addservices,removejobs,removeservices;
+    CardView adminviewjobs,addservices,removejobs,removeservices;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +40,8 @@ public class AdminDashboard extends AppCompatActivity implements NavigationView.
         drawerLayout = findViewById(R.id.drawer_layout_admin);
         navigationView = findViewById(R.id.nav_view_admin);
         toolbar = findViewById(R.id.toolbar_admin);
-        adminviewjobs = findViewById(R.id.adminmyjobs_card);
-        acceptjobs = findViewById(R.id.acceptjobs_card);
-        adminmyjobs = findViewById(R.id.adminmyjobs_card);
+        adminviewjobs = findViewById(R.id.adminviewjobs_card);
+        mAuth = FirebaseAuth.getInstance();
         addservices = findViewById(R.id.addservices_card);
         removejobs  =findViewById(R.id.removejobs_card);
 
@@ -64,8 +64,8 @@ public class AdminDashboard extends AppCompatActivity implements NavigationView.
         adminviewjobs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent = new Intent(AdminDashboard.this, AdminAcceptJobs.class);
-                //startActivity(intent);
+                Intent intent = new Intent(AdminDashboard.this, ViewJobsAdmin.class);
+                startActivity(intent);
             }
         });
 
@@ -73,7 +73,21 @@ public class AdminDashboard extends AppCompatActivity implements NavigationView.
         addservices.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AdminDashboard.this,AddPromotion.class));
+                startActivity(new Intent(AdminDashboard.this, AddServices.class));
+            }
+        });
+
+        removejobs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminDashboard.this,DeleteJobsAdmin.class));
+            }
+        });
+
+        removeservices.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AdminDashboard.this,DeleteServiceAdmin.class));
             }
         });
 
@@ -98,19 +112,21 @@ public class AdminDashboard extends AppCompatActivity implements NavigationView.
                 break;
 
             case R.id.nav_profile:
-                Intent intent = new Intent(AdminDashboard.this, UserProfile.class);
+                String uid = mAuth.getCurrentUser().getUid();
+                Intent intent = new Intent(AdminDashboard.this, AdminUserProfile.class);
+                intent.putExtra("UserID",uid);
                 startActivity(intent);
                 break;
-
+            case R.id.nav_adduser:
+                startActivity(new Intent(AdminDashboard.this,RegisterAdmin.class));
+                break;
             case R.id.nav_logout:
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(getApplicationContext(), Login.class));
                 Toast.makeText(this,"Successfully Logged Out!",Toast.LENGTH_SHORT).show();
                 finish();
                 break;
-            case R.id.nav_share:
-                Toast.makeText(this,"Share",Toast.LENGTH_SHORT).show();
-                break;
+
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
